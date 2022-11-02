@@ -1,14 +1,11 @@
-package ua.lviv.iot.spring_hibernate_back_end.repository;
+package ua.lviv.iot.spring_hibernate_back_end.service;
 
 import java.util.List;
 import java.util.Optional;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 import ua.lviv.iot.spring_hibernate_back_end.domain.Client;
 import ua.lviv.iot.spring_hibernate_back_end.domain.Gender;
 
-@Repository
-public interface ClientRepository extends JpaRepository<Client, Integer> {
+public interface ClientService extends GeneralService<Client, Integer>{
     List<Client> findByGender(Gender gender);
     Client findByNameIgnoreCase(String name);
 }
