@@ -1,6 +1,7 @@
 package ua.lviv.iot.spring_hibernate_back_end.domain;
 
-import java.sql.Date;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -31,7 +32,7 @@ public class Client {
     private String surname;
     @Basic
     @Column(name = "birthday", nullable = false)
-    private Date birthday;
+    private LocalDate birthday;
     @Basic
     @Column(name = "phone", length = 12, nullable = false)
     private String phone;

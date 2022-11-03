@@ -24,13 +24,13 @@ public class Gender {
     @Column(name = "type", length = 40, nullable = false)
     private String type;
     @OneToMany(mappedBy = "gender")
-    private List<Client> clientsById;
+    private List<Client> clients;
 
     public List<Client> getClientsById() {
-        return clientsById;
+        return clients;
     }
 
-    public void setClientsById(List<Client> clientsById) {
-        this.clientsById = clientsById;
+    public void setClients(List<Client> clients) {
+        this.clients = clients;
     }
 }
