@@ -6,7 +6,9 @@ import org.springframework.hateoas.CollectionModel;
 import ua.lviv.iot.spring_hibernate_back_end.domain.Client;
 import ua.lviv.iot.spring_hibernate_back_end.domain.Gender;
 import ua.lviv.iot.spring_hibernate_back_end.dto.ClientDto;
+import ua.lviv.iot.spring_hibernate_back_end.dto.GymDto;
 
 public interface ClientService extends GeneralService<ClientDto, Integer>{
     CollectionModel<ClientDto> findClientsByGenderId(Integer genderId);
+    CollectionModel<GymDto> findAllGyms(Integer clientId);
 }

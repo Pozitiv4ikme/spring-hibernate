@@ -8,15 +8,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
-import ua.lviv.iot.spring_hibernate_back_end.controller.ClientController;
 import ua.lviv.iot.spring_hibernate_back_end.controller.GenderController;
-import ua.lviv.iot.spring_hibernate_back_end.domain.City;
-import ua.lviv.iot.spring_hibernate_back_end.domain.Client;
 import ua.lviv.iot.spring_hibernate_back_end.domain.Gender;
-import ua.lviv.iot.spring_hibernate_back_end.dto.CityDto;
 import ua.lviv.iot.spring_hibernate_back_end.dto.GenderDto;
 import ua.lviv.iot.spring_hibernate_back_end.dto.assembler.GenderDtoAssembler;
-import ua.lviv.iot.spring_hibernate_back_end.exeption.city.CityServiceNotFoundException;
 import ua.lviv.iot.spring_hibernate_back_end.exeption.gender.GenderServiceNotFoundException;
 import ua.lviv.iot.spring_hibernate_back_end.repository.GenderRepository;
 import ua.lviv.iot.spring_hibernate_back_end.service.GenderService;
@@ -34,6 +29,7 @@ public class GenderServiceImpl implements GenderService {
         gender.setType(entity.getType());
 
         Integer genderId = genderRepository.save(gender).getId();
+        entity.setId(genderId);
 
         Link selfLink = linkTo(methodOn(GenderController.class).getGender(genderId)).withSelfRel();
         entity.add(selfLink);

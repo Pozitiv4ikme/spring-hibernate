@@ -12,8 +12,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(exclude = "freeGroupTrainingsById" + "personalTrainingsById")
 @Entity
 @Table(name = "trainer", schema = "study_iot", catalog = "")
 public class Trainer {

@@ -9,7 +9,6 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import ua.lviv.iot.spring_hibernate_back_end.controller.CityController;
-import ua.lviv.iot.spring_hibernate_back_end.controller.ClientController;
 import ua.lviv.iot.spring_hibernate_back_end.domain.City;
 import ua.lviv.iot.spring_hibernate_back_end.dto.CityDto;
 import ua.lviv.iot.spring_hibernate_back_end.dto.assembler.CityDtoAssembler;
@@ -30,6 +29,7 @@ public class CityServiceImpl implements CityService {
         city.setName(entity.getName());
 
         Integer cityId = cityRepository.save(city).getId();
+        entity.setId(cityId);
 
         Link selfLink = linkTo(methodOn(CityController.class).getCity(cityId)).withSelfRel();
         entity.add(selfLink);

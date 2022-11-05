@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.core.Relation;
 
@@ -14,9 +15,10 @@ import org.springframework.hateoas.server.core.Relation;
 @JsonInclude(Include.NON_NULL)
 @Relation(itemRelation = "trainer", collectionRelation = "trainers")
 public class TrainerDto extends RepresentationModel<TrainerDto> {
+    @Setter
     private Integer id;
-    private String name;
-    private String surname;
-    private String phone;
-    private String gym;
+    private final String name;
+    private final String surname;
+    private final String phone;
+    private final Integer gymId;
 }

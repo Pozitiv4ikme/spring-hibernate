@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ua.lviv.iot.spring_hibernate_back_end.dto.ClientDto;
+import ua.lviv.iot.spring_hibernate_back_end.dto.GymDto;
 import ua.lviv.iot.spring_hibernate_back_end.service.ClientService;
 
 @RestController
@@ -56,5 +57,11 @@ public class ClientController {
     public ResponseEntity<CollectionModel<ClientDto>> getByGenderId(@PathVariable Integer genderId) {
         CollectionModel<ClientDto> clients = clientService.findClientsByGenderId(genderId);
         return new ResponseEntity<>(clients, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/{clientId}/gyms")
+    public ResponseEntity<CollectionModel<GymDto>> getGymsByClientId(@PathVariable Integer clientId) {
+        CollectionModel<GymDto> gymsDtos = clientService.findAllGyms(clientId);
+        return new ResponseEntity<>(gymsDtos, HttpStatus.FOUND);
     }
 }

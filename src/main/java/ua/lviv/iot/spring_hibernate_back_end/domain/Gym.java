@@ -15,8 +15,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(exclude = "clients")
 @Entity
 @Table(name = "gym", schema = "study_iot", catalog = "")
 public class Gym {
@@ -37,7 +39,9 @@ public class Gym {
     @OneToMany(mappedBy = "gym")
     private List<Trainer> trainersById;
     @ManyToMany
-    @JoinTable(name = "client_gym", catalog = "", schema = "study_iot", joinColumns = @JoinColumn(name = "gym_id", referencedColumnName = "id", nullable = false), inverseJoinColumns = @JoinColumn(name = "client_id", referencedColumnName = "id", nullable = false))
+    @JoinTable(name = "client_gym", catalog = "", schema = "study_iot",
+        joinColumns = @JoinColumn(name = "gym_id", referencedColumnName = "id", nullable = false),
+        inverseJoinColumns = @JoinColumn(name = "client_id", referencedColumnName = "id", nullable = false))
     private Set<Client> clients;
 
     public City getCity() {

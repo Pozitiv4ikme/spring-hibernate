@@ -14,7 +14,6 @@ import ua.lviv.iot.spring_hibernate_back_end.dto.CityDto;
 @Component
 public class CityDtoAssembler implements RepresentationModelAssembler<City, CityDto> {
 
-
     @Override
     public CityDto toModel(City entity) {
         CityDto cityDto = CityDto.builder().id(entity.getId()).name(entity.getName()).build();

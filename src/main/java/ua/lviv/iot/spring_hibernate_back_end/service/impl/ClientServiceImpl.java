@@ -3,7 +3,6 @@ package ua.lviv.iot.spring_hibernate_back_end.service.impl;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
-import java.sql.Date;
 import java.util.List;
 import javax.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -14,7 +13,9 @@ import ua.lviv.iot.spring_hibernate_back_end.controller.ClientController;
 import ua.lviv.iot.spring_hibernate_back_end.domain.Client;
 import ua.lviv.iot.spring_hibernate_back_end.domain.Gender;
 import ua.lviv.iot.spring_hibernate_back_end.dto.ClientDto;
+import ua.lviv.iot.spring_hibernate_back_end.dto.GymDto;
 import ua.lviv.iot.spring_hibernate_back_end.dto.assembler.ClientDtoAssembler;
+import ua.lviv.iot.spring_hibernate_back_end.dto.assembler.GymDtoAssembler;
 import ua.lviv.iot.spring_hibernate_back_end.exeption.client.ClientServiceNotFoundException;
 import ua.lviv.iot.spring_hibernate_back_end.exeption.gender.GenderServiceNotFoundException;
 import ua.lviv.iot.spring_hibernate_back_end.repository.ClientRepository;
@@ -29,6 +30,7 @@ public class ClientServiceImpl implements ClientService {
     private final GenderRepository genderRepository;
 
     private final ClientDtoAssembler clientDtoAssembler;
+    private final GymDtoAssembler gymDtoAssembler;
 
     @Transactional
     public ClientDto create(ClientDto entity) {
@@ -43,6 +45,7 @@ public class ClientServiceImpl implements ClientService {
         client.setGender(gender);
 
         Integer clientId = clientRepository.save(client).getId();
+        entity.setId(clientId);
 
         Link selfLink = linkTo(methodOn(ClientController.class).getClient(clientId)).withSelfRel();
         entity.add(selfLink);
@@ -74,7 +77,7 @@ public class ClientServiceImpl implements ClientService {
         Client client = clientRepository.findById(id)
             .orElseThrow(() -> new ClientServiceNotFoundException(id));
         return ClientDto.builder()
-            .id(client.getId())
+            .id(id)
             .name(client.getName())
             .surname(client.getSurname())
             .birthday(client.getBirthday())
@@ -94,4 +97,12 @@ public class ClientServiceImpl implements ClientService {
         Link selfLink = linkTo(methodOn(ClientController.class).getByGenderId(genderId)).withSelfRel();
         return clientDtoAssembler.toCollectionModel(clients, selfLink);
     }
+
+    @Override
+    public CollectionModel<GymDto> findAllGyms(Integer clientId) {
+        Client client = clientRepository.findById(clientId).orElseThrow(() -> new ClientServiceNotFoundException(clientId));
+        Link clientLink = linkTo(methodOn(ClientController.class).getClient(clientId)).withRel("client");
+        return gymDtoAssembler.toCollectionModel(client.getGyms().stream().toList(), clientLink);
+    }
+
 }
