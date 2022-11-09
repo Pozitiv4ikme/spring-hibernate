@@ -75,4 +75,14 @@ public class GymController {
         gymService.addClientToGym(gymId, clientId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PutMapping(value = "/{gymId}/clients/{clientId}/insertIntoClientGym")
+    public ResponseEntity<?> insertIntoClientGym(@PathVariable Integer gymId, @PathVariable Integer clientId) {
+        try {
+            gymService.insertClientToGym(gymId, clientId);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error caused by: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

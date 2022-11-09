@@ -14,4 +14,7 @@ public interface GymRepository extends JpaRepository<Gym, Integer> {
     @Procedure("insertion_into_gym")
     Integer insertWithProcedure(@Param("new_phone") String phone, @Param("new_street_address") String streetAddress,
         @Param("new_city_id") Integer cityId);
+
+    @Procedure("insertion_into_client_gym_M_to_M")
+    void insertionIntoClientGym(@Param("new_gym_id") Integer gymId, @Param("new_client_id") Integer clientId);
 }
