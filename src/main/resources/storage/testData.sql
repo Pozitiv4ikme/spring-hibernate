@@ -14,11 +14,17 @@ VALUES (380932793092, 'Kravchuk 22', 2),
        (380674398042, 'Stepana Bandera 1', 1),
        (380674880844, 'Internationalist soldiers 12', 4);
 
-INSERT INTO trainer (id, name, surname, phone, gym_id)
-VALUES (1, 'Vitalii', 'Pashynskyi', '380638743292', 3),
-       (2, 'Pavlo', 'Tkachuk', '380678241228', 1),
-       (3, 'Victoria', 'Pavelchak', '380637681290', 2),
-       (4, 'Zenoviy', 'Veres', '380678934201', 2);
+INSERT INTO membership(card_price)
+VALUES (10330.21),
+       (3499.99),
+       (4999.99),
+       (1549.01);
+
+INSERT INTO trainer (id, name, surname, phone, gym_id, membership_id)
+VALUES (1, 'Vitalii', 'Pashynskyi', '380638743292', 3, 2),
+       (2, 'Pavlo', 'Tkachuk', '380678241228', 1, 1),
+       (3, 'Victoria', 'Pavelchak', '380637681290', 2, 3),
+       (4, 'Zenoviy', 'Veres', '380678934201', 2, 1);
 
 INSERT INTO personal_training (id, trainer_id)
 VALUES (1, 2),

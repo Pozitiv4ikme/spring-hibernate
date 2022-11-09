@@ -17,7 +17,7 @@ spring:
     location: classpath:banner.txt
 
   mvc:
-    pathmatch:
+    path match:
       matching-strategy: ant_path_matcher
 
 server:

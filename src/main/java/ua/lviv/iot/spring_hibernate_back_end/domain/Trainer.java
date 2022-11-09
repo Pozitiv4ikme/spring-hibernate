@@ -1,5 +1,6 @@
 package ua.lviv.iot.spring_hibernate_back_end.domain;
 
+import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -33,6 +34,9 @@ public class Trainer {
     @Basic
     @Column(name = "phone", length = 12, nullable = false)
     private String phone;
+    @Basic
+    @Column(name = "membership_id", nullable = false)
+    private Integer membershipId;
     @OneToMany(mappedBy = "trainer")
     private List<FreeGroupTraining> freeGroupTrainingsById;
     @OneToMany(mappedBy = "trainer")
