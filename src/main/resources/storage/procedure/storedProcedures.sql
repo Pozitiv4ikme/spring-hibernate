@@ -33,3 +33,16 @@ create procedure insertion_into_client_gym_M_to_M(
         insert into client_gym(gym_id, client_id) VALUE (new_gym_id_exists, new_client_id_exists);
     end //
 DELIMITER ;
+
+-- insert 10 records into free_group_program table
+DROP PROCEDURE IF EXISTS insert_10_records_into_free_group_program;
+DELIMITER //
+create procedure insert_10_records_into_free_group_program()
+    begin
+        declare counter int default 1;
+        while counter < 11 do
+                INSERT INTO free_group_program(day, exercise) VALUE (concat('day', counter), concat('exercise', counter));
+                set counter = counter + 1;
+            end while;
+    end //
+DELIMITER ;
