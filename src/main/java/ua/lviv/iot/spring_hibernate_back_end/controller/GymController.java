@@ -28,6 +28,12 @@ public class GymController {
         return new ResponseEntity<>(newGym, HttpStatus.CREATED);
     }
 
+    @PostMapping(value = "/insertWithProcedure")
+    public ResponseEntity<GymDto> insertWithProcedure(@RequestBody GymDto gymDto) {
+        GymDto newGym = gymService.insertWithProcedure(gymDto);
+        return new ResponseEntity<>(newGym, HttpStatus.CREATED);
+    }
+
     @PutMapping(value = "/{gymId}")
     public ResponseEntity<?> updateGym(@RequestBody GymDto uGym, @PathVariable Integer gymId) {
         gymService.update(uGym, gymId);

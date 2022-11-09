@@ -101,6 +101,19 @@ public class GymServiceImpl implements GymService {
     }
 
     @Override
+    public GymDto insertWithProcedure(GymDto gymDto) {
+        City city =
+            cityRepository.findById(gymDto.getCityId()).orElseThrow(() -> new CityServiceNotFoundException(gymDto.getCityId()));
+
+        Integer id = gymRepository.insertWithProcedure(gymDto.getPhone(), gymDto.getStreetAddress(),
+            city.getId());
+
+        Link selfLink = linkTo(methodOn(GymController.class).getGym(id)).withSelfRel();
+        gymDto.add(selfLink);
+        return gymDto;
+    }
+
+    @Override
     public void addClientToGym(Integer gymId, Integer clientId) {
         Client client =
             clientRepository.findById(clientId).orElseThrow(() -> new ClientServiceNotFoundException(clientId));

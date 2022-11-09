@@ -9,5 +9,6 @@ public interface GymService extends GeneralService<GymDto, Integer>{
     CollectionModel<GymDto> findByCityId(Integer cityId);
     CollectionModel<ClientDto> findAllClientsById(Integer gymId);
 
+    GymDto insertWithProcedure(GymDto gymDto);
     void addClientToGym(Integer gymId, Integer clientId);
 }
