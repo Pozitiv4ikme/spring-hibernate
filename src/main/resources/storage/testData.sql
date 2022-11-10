@@ -114,7 +114,9 @@ INSERT INTO client (name, surname, birthday, phone, gender_id)
 VALUES ('Marko', 'Yaminskyi', '2004-12-10', '380634892933', 1),
        ('Cat', 'Beautiful', '2005-12-20', '380961531912', 2),
        ('Alina', 'Veres', '2005-03-18', '380675979856', 2),
-       ('Ruslan', 'Toxic', '2004-01-28', '380668092751', 3);
+       ('Ruslan', 'Toxic', '2004-01-28', '380668092751', 4),
+       ('Dmytro', 'Shaposhnikov', '2004-04-15', '380662292751', 1),
+       ('Oleg', 'Tkachuk', '2004-01-09', '380668011751', 1);
 
 
 INSERT INTO client_gym (gym_id, client_id)
