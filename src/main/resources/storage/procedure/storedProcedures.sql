@@ -46,3 +46,22 @@ create procedure insert_10_records_into_free_group_program()
             end while;
     end //
 DELIMITER ;
+
+-- custom function like avg, max, min or sum
+DROP FUNCTION IF EXISTS complexity_avg;
+DELIMITER //
+create function complexity_avg()
+    returns INT DETERMINISTIC
+    begin
+        return (SELECT avg(complexity) FROM exercise);
+    end //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS exercise_complexity_avg;
+DELIMITER //
+create procedure exercise_complexity_avg(
+    OUT res_complexity_avg INT)
+    begin
+        SELECT complexity_avg() INTO res_complexity_avg;
+    end //
+DELIMITER ;
