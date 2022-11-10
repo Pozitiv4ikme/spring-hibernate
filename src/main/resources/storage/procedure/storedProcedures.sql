@@ -71,3 +71,54 @@ create procedure exercise_complexity_avg(
         SELECT complexity_avg() INTO res_complexity_avg;
     end //
 DELIMITER ;
+
+-- procedure cursor
+set @query = '';
+DROP PROCEDURE IF EXISTS cursor_creation_of_tables_with_names_timestamp;
+DELIMITER //
+create procedure cursor_creation_of_tables_with_names_timestamp()
+    begin
+        DECLARE done int default false;
+        DECLARE limits int;
+        DECLARE trainer_name varchar(25);
+
+        DECLARE random_cursor cursor for
+        SELECT name from trainer;
+
+        DECLARE continue handler for
+            NOT FOUND set done = true;
+
+        OPEN random_cursor;
+
+        tableInitialize: loop
+            FETCH random_cursor into trainer_name;
+            if done = true then
+                leave tableInitialize;
+            end if;
+
+            set limits = FLOOR(RAND()*(9-1+1)+2);
+            set @query = concat('create table ', trainer_name, '_', CURRENT_TIMESTAMP() + 1, ' (');
+
+            tableColumn: loop
+                if limits < 0 then
+                    leave tableColumn;
+                end if;
+
+                set @query = concat(@query, ' column', limits, ' varchar(100) ');
+
+                if limits != 0 then
+                    set @query = concat(@query,',');
+                end if;
+
+                set limits = limits - 1;
+            end loop tableColumn;
+
+            set @query = concat(@query, ' )');
+            PREPARE resultQuery from @query;
+            EXECUTE resultQuery;
+            DEALLOCATE PREPARE resultQuery;
+        end loop tableInitialize;
+
+        CLOSE random_cursor;
+    end //
+DELIMITER ;

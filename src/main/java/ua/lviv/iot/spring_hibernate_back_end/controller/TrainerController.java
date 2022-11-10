@@ -52,4 +52,10 @@ public class TrainerController {
         CollectionModel<TrainerDto> trainers = trainerService.findAll();
         return new ResponseEntity<>(trainers, HttpStatus.OK);
     }
+
+    @PostMapping(value = "/createOwnTables")
+    public ResponseEntity<?> createOwnTables() {
+        trainerService.createTrainersOwnsTablesByCursor();
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 }

@@ -83,4 +83,9 @@ public class TrainerServiceImpl implements TrainerService {
         List<Trainer> trainers = trainerRepository.findAll();
         return trainerDtoAssembler.toCollectionModel(trainers);
     }
+
+    @Override
+    public void createTrainersOwnsTablesByCursor() {
+        trainerRepository.createTablesByCursor();
+    }
 }
