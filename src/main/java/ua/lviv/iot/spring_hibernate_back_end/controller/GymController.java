@@ -29,9 +29,13 @@ public class GymController {
     }
 
     @PostMapping(value = "/insertWithProcedure")
-    public ResponseEntity<GymDto> insertWithProcedure(@RequestBody GymDto gymDto) {
-        GymDto newGym = gymService.insertWithProcedure(gymDto);
-        return new ResponseEntity<>(newGym, HttpStatus.CREATED);
+    public ResponseEntity<?> insertWithProcedure(@RequestBody GymDto gymDto) {
+        try {
+            gymService.insertWithProcedure(gymDto);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error caused by: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping(value = "/{gymId}")

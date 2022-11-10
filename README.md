@@ -12,6 +12,7 @@
  - Create a package that inserts 10 tapes into an arbitrary DB table in the format <Noname+№>, for example: Noname5, 
    Noname6, Noname7, etc.
  - Write a custom function that will search for `Max, Min, Sum or Avg` for a column of an arbitrary table in the database. Write a procedure that will call this function in `SELECT`.
+ - Write 1 procedure with a cursor to perform one of the following tasks:
    - Using a cursor, ensure the dynamic creation of 2 tables with names containing a time stamp, the structure of the tables is identical to any structure of a DB table. Then randomly copy tapes from the parent table to one or the other additional table. Re-starting the procedure again creates new similar tables, in which the data from the parent table will be randomly spread again.
    - Using a cursor, ensure dynamic creation of tables with names+timestamp taken from a column from an arbitrary DB table, with a random number of columns (from 1 to 9). Column names and type are arbitrary.
    - Using a cursor, ensure dynamic creation of databases with names taken from a column from an arbitrary table of the current database, with a random number of tables for each database (from 1 to 9). The structure of the tables is arbitrary. The names of the tables correspond to the name of the database with a serial number from 1 to 9.

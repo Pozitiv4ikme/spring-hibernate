@@ -1,4 +1,4 @@
--- parameterized insertion in client table
+-- parameterized insertion in gym table
 DROP PROCEDURE IF EXISTS insertion_into_gym;
 DELIMITER //
 create procedure insertion_into_gym(
@@ -7,7 +7,13 @@ create procedure insertion_into_gym(
     in new_city_id int,
     OUT generated_id int)
     begin
-        insert into gym(phone, street_address, city_id) VALUE (new_phone, new_street_address, new_city_id);
+        DECLARE new_city_id_exist int;
+        select new_city_id into new_city_id_exist;
+        if new_city_id_exist is null then
+            signal sqlstate '45000'
+            set MESSAGE_TEXT = 'City with this id not found';
+        end if;
+        insert into gym(phone, street_address, city_id) VALUE (new_phone, new_street_address, new_city_id_exist);
         select id into generated_id from gym where phone=new_phone;
     end //
 DELIMITER ;
