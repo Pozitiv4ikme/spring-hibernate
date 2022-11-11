@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.core.Relation;
 
@@ -14,7 +15,8 @@ import org.springframework.hateoas.server.core.Relation;
 @JsonInclude(Include.NON_NULL)
 @Relation(itemRelation = "free_group_program", collectionRelation = "free_group_programs")
 public class FreeGroupProgramDto extends RepresentationModel<FreeGroupProgramDto> {
-    private final Integer id;
+    @Setter
+    private Integer id;
     private final String day;
     private final String exercise;
 }

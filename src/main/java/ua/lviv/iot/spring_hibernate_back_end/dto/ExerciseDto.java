@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.core.Relation;
 
@@ -14,10 +15,11 @@ import org.springframework.hateoas.server.core.Relation;
 @JsonInclude(Include.NON_NULL)
 @Relation(itemRelation = "exercise", collectionRelation = "exercises")
 public class ExerciseDto extends RepresentationModel<ExerciseDto> {
-    private final Integer id;
+    @Setter
+    private Integer id;
     private final Integer numberOfRepetitions;
     private final Integer approach;
     private final Integer complexity;
     private final String typeOfMuscleLoadOn;
-    private final String personalExerciseMachine;
+    private final Integer personalExerciseMachineId;
 }

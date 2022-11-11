@@ -8,6 +8,8 @@ import java.util.Set;
 import lombok.AllArgsConstructor;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.Link;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ua.lviv.iot.spring_hibernate_back_end.controller.GymController;
 import ua.lviv.iot.spring_hibernate_back_end.domain.City;
@@ -98,6 +100,24 @@ public class GymServiceImpl implements GymService {
         List<Client> clients = gym.getClients().stream().toList();
         Link gymLink = linkTo(methodOn(GymController.class).getGym(gymId)).withRel("gym");
         return clientDtoAssembler.toCollectionModel(clients, gymLink);
+    }
+
+    @Override
+    public GymDto insertWithProcedure(GymDto gymDto) {
+        City city =
+            cityRepository.findById(gymDto.getCityId()).orElseThrow(() -> new CityServiceNotFoundException(gymDto.getCityId()));
+
+        Integer id = gymRepository.insertWithProcedure(gymDto.getPhone(), gymDto.getStreetAddress(),
+            city.getId());
+
+        Link selfLink = linkTo(methodOn(GymController.class).getGym(id)).withSelfRel();
+        gymDto.add(selfLink);
+        return gymDto;
+    }
+
+    @Override
+    public void insertClientToGym(Integer gymId, Integer clientId) {
+        gymRepository.insertionIntoClientGym(gymId, clientId);
     }
 
     @Override

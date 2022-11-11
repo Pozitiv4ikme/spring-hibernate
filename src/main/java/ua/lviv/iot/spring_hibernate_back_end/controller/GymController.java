@@ -28,6 +28,16 @@ public class GymController {
         return new ResponseEntity<>(newGym, HttpStatus.CREATED);
     }
 
+    @PostMapping(value = "/insertWithProcedure")
+    public ResponseEntity<?> insertWithProcedure(@RequestBody GymDto gymDto) {
+        try {
+            gymService.insertWithProcedure(gymDto);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error caused by: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @PutMapping(value = "/{gymId}")
     public ResponseEntity<?> updateGym(@RequestBody GymDto uGym, @PathVariable Integer gymId) {
         gymService.update(uGym, gymId);
@@ -67,6 +77,16 @@ public class GymController {
     @PutMapping(value = "/{gymId}/clients/{clientId}")
     public ResponseEntity<?> addClientToGym(@PathVariable Integer gymId, @PathVariable Integer clientId) {
         gymService.addClientToGym(gymId, clientId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping(value = "/{gymId}/clients/{clientId}/insertIntoClientGym")
+    public ResponseEntity<?> insertIntoClientGym(@PathVariable Integer gymId, @PathVariable Integer clientId) {
+        try {
+            gymService.insertClientToGym(gymId, clientId);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error caused by: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

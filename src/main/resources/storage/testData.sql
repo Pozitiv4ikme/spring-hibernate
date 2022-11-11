@@ -14,11 +14,17 @@ VALUES (380932793092, 'Kravchuk 22', 2),
        (380674398042, 'Stepana Bandera 1', 1),
        (380674880844, 'Internationalist soldiers 12', 4);
 
-INSERT INTO trainer (id, name, surname, phone, gym_id)
-VALUES (1, 'Vitalii', 'Pashynskyi', '380638743292', 3),
-       (2, 'Pavlo', 'Tkachuk', '380678241228', 1),
-       (3, 'Victoria', 'Pavelchak', '380637681290', 2),
-       (4, 'Zenoviy', 'Veres', '380678934201', 2);
+INSERT INTO membership(card_price)
+VALUES (10330.21),
+       (3499.99),
+       (4999.99),
+       (1549.01);
+
+INSERT INTO trainer (id, name, surname, phone, gym_id, membership_id)
+VALUES (1, 'Vitalii', 'Pashynskyi', '380638743292', 3, 2),
+       (2, 'Pavlo', 'Tkachuk', '380678241228', 1, 1),
+       (3, 'Victoria', 'Pavelchak', '380637681290', 2, 3),
+       (4, 'Zenoviy', 'Veres', '380678934201', 2, 1);
 
 INSERT INTO personal_training (id, trainer_id)
 VALUES (1, 2),
@@ -108,7 +114,9 @@ INSERT INTO client (name, surname, birthday, phone, gender_id)
 VALUES ('Marko', 'Yaminskyi', '2004-12-10', '380634892933', 1),
        ('Cat', 'Beautiful', '2005-12-20', '380961531912', 2),
        ('Alina', 'Veres', '2005-03-18', '380675979856', 2),
-       ('Ruslan', 'Toxic', '2004-01-28', '380668092751', 3);
+       ('Ruslan', 'Toxic', '2004-01-28', '380668092751', 4),
+       ('Dmytro', 'Shaposhnikov', '2004-04-15', '380662292751', 1),
+       ('Oleg', 'Tkachuk', '2004-01-09', '380668011751', 1);
 
 
 INSERT INTO client_gym (gym_id, client_id)
